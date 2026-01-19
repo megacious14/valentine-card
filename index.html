@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💕</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+.card {
+  background: rgba(255,255,255,0.15);
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 340px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+img.main {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 12px 25px;
+  margin: 8px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.yes { background: #ff4d6d; color: white; }
+.no { background: white; color: #ff4d6d; }
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.overlay video,
+.overlay img {
+  width: 90%;
+  max-width: 360px;
+  border-radius: 20px;
+}
+
+/* CONFETTI */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: fall 3s linear forwards;
+  z-index: 4;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <img src="IMG_1012.jpeg" class="main">
+  <p>Hey <strong>lightskinnedbigheadelorm</strong> 💕</p>
+  <h2>Will you be my Valentine?</h2>
+
+  <button class="yes" id="yesBtn" onclick="yesClick()">Yes 💗</button>
+  <button class="no" id="noBtn" onclick="noClick()">No 🫤</button>
+</div>
+
+<!-- YES VIDEO -->
+<div class="overlay" id="yesBox">
+  <video id="yesVideo" src="uuid=2EB2FC13-A862-4886-AB02-C4FB01B3106F&code=001&library=1&type=3&mode=1&loc=true&cap=true.mp4" controls></video>
+</div>
+
+<!-- NO MEME -->
+<div class="overlay" id="noBox">
+  <img src="IMG_4979.jpeg">
+</div>
+
+<script>
+const phoneNumber = "233555362376";
+
+function lockButtons() {
+  document.getElementById("yesBtn").disabled = true;
+  document.getElementById("noBtn").disabled = true;
+}
+
+/* CONFETTI FUNCTION */
+function launchConfetti() {
+  for (let i = 0; i < 60; i++) {
+    const conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.background =
+      ["#ff4d6d", "#ffd6e0", "#ffffff", "#ff7eb3"][Math.floor(Math.random() * 4)];
+    conf.style.animationDuration = (Math.random() * 2 + 2) + "s";
+    document.body.appendChild(conf);
+
+    setTimeout(() => conf.remove(), 3000);
+  }
+}
+
+function yesClick() {
+  lockButtons();
+  launchConfetti();
+
+  const box = document.getElementById("yesBox");
+  const vid = document.getElementById("yesVideo");
+
+  box.style.display = "flex";
+  vid.play();
+
+  const msg = "HE SAID YES 🤭💗";
+  window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`, "_blank");
+}
+
+function noClick() {
+  lockButtons();
+  document.getElementById("noBox").style.display = "flex";
+
+  const msg = "He tapped NO 😭💔";
+  window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`, "_blank");
+}
+</script>
+
+</body>
+</html>
